@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include <string.h>
 
-typedef struct 
+typedef struct
 {
     char module [30];
     char status [30];
+    int idavion ;
     int capacite ;
 
 }Avions;
 
 
-typedef struct 
+typedef struct
 {
     char nom [50];
     int nbavion;
@@ -25,12 +26,15 @@ void Supprimeravion();
 void Afficheravion();
 void Rechercheravion();
 void Trieravion();
+void Affichageaeroport();
+
 
 int nbavion;
+Aeroport Ar[1];
 Avions Av[50];
-int main()
+int MenuAvion()
 {
-    
+
     int choix;
 
     label:
@@ -54,78 +58,130 @@ int main()
         goto label;
     case 2:
         modifieravion();
-        goto label; 
+        goto label;
     case 3:
         Supprimeravion();
-        goto label; 
+        goto label;
     case 4:
         Afficheravion();
         goto label;
     case 5:
         Rechercheravion();
-        goto label;  
+        goto label;
     case 6:
         Trieravion();
         goto label;
     case 0:
         break;
     }
+
 }
 
+void Affichageaeroprt(){
+    printf ("SVP saisez le nom de aeroport : \n ");
+    scanf("%s",Ar[1].nom);
+}
+int ID = 1;
+int count=1;
 void Ajouteravion()
 {
-    
+
     printf("saisir le nombre des avions a ajoutee :\n ");
     scanf("%d", &nbavion);
+
+    int size = nbavion+count;
     
     
-    for (int j = 0; j < nbavion; j++)
+    for (int j = count; j <size; j++)
         {
-            int statut;
-            printf("Saisir le module d'avion %d:" ,j);
-            getchar();
-            fgets(Av[j].module,sizeof(Av[j].module),stdin);
-            printf("Saisir la capacite d'avion %d:",j);
-            scanf("%d %[^\n]", &Av[j].capacite);
-            getchar();
-            printf("taper 1 pour disponible \n taper 2 pour En maintenance \n taper 3 pour En vol");
-            scanf("%d %[^\n]", &statut);
-            getchar();
-            switch (statut)
-            {
-            case 1:
-                statut == "disponible";
-                break;
-            case 2:
-                statut == "en maintenance";
-                break;
-            case 3:
-                statut == "en vol";
-                break;
-
-            default:
-                break;
-            }
+            
+            
+            printf("Saisir le module d'avion [%d]:",ID);
+            scanf(" %[^\n]%*c", Av[j].module);
+            printf("Saisir la capacite d'avion [%d]:",ID);
+            scanf("%d", &Av[j].capacite);
+            printf("anserer le statut [%d]: ",ID);
+            scanf(" %[^\n]%*c", Av[j].status);
+            printf("\n \n");
+            
+             
+             Av[j].idavion=ID++;
+             printf("L id d avion est :%d \n ",Av[j].idavion);
+            
         }
+        
+        count+=nbavion;
+        printf("\n \n");
+       
+        
+       
 }
 
-void modifieravion()
-{
-    printf("Hello  modifieravion");
-}
+// void modifieravion()
+// {
+//     int idsaisie;
+//     printf("Inserer L id d'avion a modifier :\n");
+//     scanf("%d",&idsaisie);
+//     for (int i = 0; i < count; i++)
+
+//     {
+        
+//         if (Av[i].idavion==idsaisie)
+//         {
+//             printf("Saisir le module d'avion [%d]:",i);
+//             scanf(" %[^\n]%*c", Av[i].module);
+//             printf("Saisir la capacite d'avion [%d]:",i);
+//             scanf("%d", &Av[i].capacite);
+//             printf("anserer le statut [%d]: ",i);
+//             scanf(" %[^\n]%*c", Av[i].status);
+//             printf("\n \n");
+            
+//         }
+        
+        
+        
+//     }
+    
+// }
 void Supprimeravion()
 {
-    printf("Hello  Supprimeravion");
+    int suprrimer;
+    printf("Choisser L'id d'avion voulez vous suprrimer :\n");
+    scanf("%d",&suprrimer);
+    for (int i = 0; i < count; i++)
+    {
+        if (Av[i].idavion==suprrimer)
+        {
+            for ( int j = i; j < count; j++)
+            {
+                Av[i].idavion=Av[i+1].idavion;
+                strcopy(Av[i].module,Av[i+1].module);
+                strcopy(Av[i].status,Av[i+1].status);
+            }
+            
+            
+
+        }
+        
+    }
+    count--;
+    
 }
 void Afficheravion()
 {
-    for (int i = 0; i < nbavion; i++)
+    for (int i = 1; i < count; i++)
     {
-        printf("Le module de Lavion %s :\n",i+1,Av[i].module);
-        printf("Le capacite de Lavion %d :\n",i+1,Av[i].capacite);
-        printf("Le statut de Lavion %s :\n",i+1,Av[i].status);
+        printf("Les infos de l'avion [%d]: \n",Av[i].idavion);
+        printf("Le module de Lavion  [%d]: %s \n",Av[i].idavion,Av[i].module);
+        printf("Le capacite de Lavion  [%d]: %d \n",Av[i].idavion,Av[i].capacite);
+        printf("Le statut de Lavion  [%d]: %s \n",Av[i].idavion,Av[i].status);
+        printf("\n \n");
+       
     }
+    printf("\n \n");
+   
     
+
 }
 void Rechercheravion()
 {
@@ -135,3 +191,7 @@ void Trieravion()
 {
     printf("Hello  Trieravion");
 }
+int main(){
+    Affichageaeroprt();
+    MenuAvion();
+} 
