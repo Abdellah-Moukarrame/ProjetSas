@@ -50,7 +50,7 @@ label:
 
     printf(" ||  7-Pour Statistique une avoin appuyer sur 7 ||  \n");
 
-    printf("==================================================");
+    printf(" =================================================  \n");
     scanf("%d", &choix);
     switch (choix)
     {
@@ -83,7 +83,7 @@ label:
 void Affichageaeroprt()
 {
     printf("SVP saisez le nom de aeroport : \n ");
-    scanf("%s", Ar[1].nom);
+    scanf(" %[^\n]%*c", Ar[1].nom);
     printf("Bienvenue au aeroport : %s \n", Ar[1].nom);
 }
 int ID = 1;
@@ -95,7 +95,7 @@ void Ajouteravion()
     scanf("%d", &nbavion);
 
     int size = nbavion + count;
-
+    int choixstatus;
     for (int j = count; j < size; j++)
     {
 
@@ -103,12 +103,32 @@ void Ajouteravion()
         scanf(" %[^\n]%*c", Av[j].module);
         printf("Saisir la capacite d'avion [%d]:", ID);
         scanf("%d", &Av[j].capacite);
-        printf("anserer le statut          [%d]: ", ID);
-        scanf(" %[^\n]%*c", Av[j].status);
+        printf("choisisser le statut :\n pour envol entrer 1\n pour disponible entrer 2\n pour en maintenance entrer 3\n");
+        scanf("%d", &choixstatus);
+
+        switch (choixstatus)
+        {
+        case 1:
+            strcpy(Av[j].status, "en vol");
+            break;
+        case 2:
+            strcpy(Av[j].status, "disponible");
+            break;
+        case 3:
+            strcpy(Av[j].status, "en maintenance");
+            break;
+        default:
+            printf("choix est invalid \n");
+            strcpy(Av[j].status, "disponible");
+            break;
+        }
+
+        printf("statut que vous avez choisi est : %s \n", Av[j].status);
+
         printf("\n \n");
 
         Av[j].idavion = ID++;
-        printf("L id d avion est :%d \n ", Av[j].idavion);
+        printf("L id d avion est :%d \n \n \n ", Av[j].idavion);
     }
 
     count += nbavion;
@@ -126,11 +146,11 @@ void modifieravion()
 
         if (Av[i].idavion == idsaisie)
         {
-            printf("Saisir le module d'avion [%d]:", i);
+            printf("Saisir le module d'avion :");
             scanf(" %[^\n]%*c", Av[i].module);
-            printf("Saisir la capacite d'avion [%d]:", i);
+            printf("Saisir la capacite d'avion :");
             scanf("%d", &Av[i].capacite);
-            printf("anserer le statut [%d]: ", i);
+            printf("anserer le statut : ");
             scanf(" %[^\n]%*c", Av[i].status);
             printf("\n \n");
         }
@@ -145,9 +165,9 @@ void Supprimeravion()
     {
         if (Av[i].idavion == suprrimer)
         {
-            for (int j = i; j < count-1; j++)
+            for (int j = i; j < count - 1; j++)
             {
-                Av[i].idavion = Av[i + 1].idavion;
+                Av[i] = Av[i + 1];
             }
         }
     }
@@ -174,6 +194,7 @@ void Rechercheravion()
     {
     case 1:
         int idarechercher;
+        int trouve = 0;
         printf("saisir l'id d'avion vous voulez recherchez : \n");
         scanf("%d", &idarechercher);
         for (int i = 0; i < count; i++)
@@ -181,62 +202,65 @@ void Rechercheravion()
             if (Av[i].idavion == idarechercher)
             {
                 printf("Le module de l'avion de ce id   [%d]  : %s \n", i + 1, Av[i].module);
-                printf("La capacite de l'avion de ce id [%d]  : %d \n", i+1, Av[i].capacite);
-                printf("Le status de l'avion de ce id   [%d]  : %s \n", i+1, Av[i].status);
+                printf("La capacite de l'avion de ce id [%d]  : %d \n", i + 1, Av[i].capacite);
+                printf("Le status de l'avion de ce id   [%d]  : %s \n", i + 1, Av[i].status);
             }
-            else
-            {
-                printf("Le id que vous avez ajouter est invalid");
-            }
-        
-            
-            
+            trouve = 1;
         }
-        
+        if (trouve == 0)
+        {
+            printf("le id que vous avez ajouter est invalid \n");
+        }
 
         break;
     case 2:
         char modulearechercher[50];
         printf("saisir le module d'avion vous voulez recherchez : \n");
         scanf("%s", modulearechercher);
+        int trouver = 0;
         for (int i = 0; i < count; i++)
         {
             if (strcasecmp(Av[i].module, modulearechercher) == 0)
             {
-                printf("Le id de l'avion de ce module       [%d]:%d \n", i+1, Av[i].idavion);
-                printf("La capacite de l'avion ce de module [%d]:%d \n", i+1, Av[i].capacite);
-                printf("Le status de l'avion de ce module   [%d]:%s \n", i+1, Av[i].status);
+                printf("Le id de l'avion de ce module       [%d]:%d \n", i + 1, Av[i].idavion);
+                printf("La capacite de l'avion ce de module [%d]:%d \n", i + 1, Av[i].capacite);
+                printf("Le status de l'avion de ce module   [%d]:%s \n", i + 1, Av[i].status);
             }
-            else
-            {
-                printf("Le module que vous avez ajouter est invalid");
-            }
+            trouver = 1;
+        }
+        if (trouver == 0)
+        {
+            printf("le module que vous avez ajouter est invalid \n");
         }
 
-     break;
+        break;
 
-    default: printf("le choix invalid\n");
+    default:
+        printf("le choix invalid\n");
         break;
     }
 }
 
-
 void Statistique()
 {
     int coixstatistique;
-    printf("========================BIENVENUE AU MENU DES STATISTIQUES======================================= \n");
-    printf("Pour afficher la nombre total des avions de l'aeroport (%s) entrer 1              :\n", Ar[1].nom);
-    printf("Pour afficher la nombre des avions par status de l'aeroport (%s) entrer 2         :\n", Ar[1].nom);
-    printf("Pour afficher les avion ayant la plus grande capacité de l'aeroport (%s) entrer 3 :\n", Ar[1].nom);
-    printf("Pour afficher les avion ayant la plus petite capacité de l'aeroport (%s) entrer 4 :\n", Ar[1].nom);
+    printf("========================BIENVENUE AU MENU DES STATISTIQUES========================= \n");
+    printf("Pour afficher la nombre total des avions de l'aeroport entrer               1:\n");
+    printf("Pour afficher la nombre des avions par status de l'aeroport entrer          2:\n");
+    printf("Pour afficher les avion ayant la plus grande capacité de l'aeroport entrer  3:\n");
+    printf("Pour afficher les avion ayant la plus petite capacité de l'aeroport entrer  4:\n");
+    printf("Pour afficher le qoficient des avion disponible                             5:\n");
+    printf("Pour afficher la capacite totale des avion disponible                       6:\n");
+
     scanf("%d", &coixstatistique);
+    int countdispo=0 ;
     switch (coixstatistique)
     {
     case 1:
         printf("nombre totale des avions est: %d", count);
         break;
     case 2:
-        int countdispo = 0;
+         countdispo;
         int countmaintenance = 0;
         int countvol = 0;
         for (int i = 0; i < count; i++)
@@ -245,11 +269,11 @@ void Statistique()
             {
                 countdispo++;
             }
-            if ((strcmp(Av[i].status, "enmaintenance") == 0))
+            if ((strcmp(Av[i].status, "en maintenance") == 0))
             {
                 countmaintenance++;
             }
-            if ((strcmp(Av[i].status, "envol") == 0))
+            if ((strcmp(Av[i].status, "en vol") == 0))
             {
                 countvol++;
             }
@@ -261,33 +285,53 @@ void Statistique()
         break;
     case 3:
         int i = 0;
+        int index;
         int max = Av[0].capacite;
         for (i; i < count; i++)
         {
             if (Av[i].capacite > max)
             {
                 max = Av[i].capacite;
+                index=i;
             }
         }
-        printf("l'id de avion ayant la plus grand capacité           :%d \n", Av[i].idavion);
-        printf("le module de avion ayant la plus grand capacité      :%s \n", Av[i].module);
-        printf("le statut de avion ayant la plus grand capacité      :%s \n", Av[i].status);
+        printf("l'id de avion ayant la plus grand capacité           :%d \n", Av[index].idavion);
+        printf("le module de avion ayant la plus grand capacité      :%s \n", Av[index].module);
+        printf("le statut de avion ayant la plus grand capacité      :%s \n", Av[index].status);
 
         break;
     case 4:
         int j = 0;
+        int indexx;
         int min = Av[0].capacite;
         for (j; j < count; j++)
         {
             if (Av[j].capacite < min)
             {
                 min = Av[j].capacite;
+                indexx=j;
             }
         }
-        printf("l'id de avion ayant la plus petite capacité      :%d \n", Av[i].idavion);
-        printf("le module de avion ayant la plus petite capacité :%s \n", Av[i].module);
-        printf("le statut de avion ayant la plus petite capacité :%s \n", Av[i].status);
+        printf("l'id de avion ayant la plus petite capacité      :%d \n", Av[indexx].idavion);
+        printf("le module de avion ayant la plus petite capacité :%s \n", Av[indexx].module);
+        printf("le statut de avion ayant la plus petite capacité :%s \n", Av[indexx].status);
         break;
+    case 5:
+        float qoficient = ( countdispo/count)*100;
+
+        printf("l'qoficient des avions disponible :%.2f %% \n",qoficient);
+        break;
+    case 6:
+        int sommecapacity=0;
+        for (int i = 0; i < count; i++)
+        {
+            sommecapacity+=Av[i].capacite;
+        }
+        printf("la somme des capicity des avions est :%d",sommecapacity);
+        
+
+        
+        
 
     default:
         break;
@@ -310,7 +354,15 @@ void Triercapacite()
             }
         }
     }
-    Afficheravion();
+    for (int X = 0; X < count; X++)
+    {
+        printf("Les infos de l'avion  [%d]  : \n", Av[X].idavion);
+        printf("Le module de Lavion   [%d]  : %s \n", Av[X].idavion, Av[X].module);
+        printf("Le capacite de Lavion [%d]  : %d \n", Av[X].idavion, Av[X].capacite);
+        printf("Le statut de Lavion   [%d]  : %s \n", Av[X].idavion, Av[X].status);
+        printf("\n \n");
+    }
+    printf("\n \n");
 }
 void Triermodule()
 {
@@ -320,7 +372,8 @@ void Triermodule()
 
         for (int j = i + 1; j < count; j++)
         {
-            if (Av[i].module > Av[j].module)
+            if (strcmp(Av[i].module, Av[j].module) > 0)
+
             {
                 change = Av[i];
                 Av[i] = Av[j];
@@ -337,21 +390,20 @@ void Trieravion()
 
     printf("pour trier les avions avec capacity entrer 1:\n");
     printf("pour trier les avions avec module entrer 2  :\n");
-    scanf("%d \n",&choixtrier);
+    scanf("%d", &choixtrier);
     switch (choixtrier)
     {
-    case 1 :
+    case 1:
         Triercapacite();
         break;
-    case 2 :
+    case 2:
         Triermodule();
         break;
-    
-    default:
-    printf("lechoix que vous avez entrer invalid \n \n");
-        break;
-    }
 
+    default:
+        printf("lechoix que vous avez entrer invalid \n \n");
+        return;
+    }
 }
 
 int main()
