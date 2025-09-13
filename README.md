@@ -1,54 +1,69 @@
-# ProjetSas âœˆï¸
+ProjetSas
 
-## ðŸ“Œ Description
-Ce projet est une application en langage **C** qui permet de gÃ©rer les avions dâ€™un aÃ©roport.  
-Lâ€™utilisateur peut ajouter, modifier, supprimer, rechercher, trier et afficher des avions, ainsi que consulter diffÃ©rentes statistiques liÃ©es aux avions.
+Description
 
-## ðŸ› ï¸ FonctionnalitÃ©s
-- Ajouter un avion avec :
-  - Module (nom)
-  - CapacitÃ©
-  - Statut (en vol, disponible, en maintenance)
-- Modifier un avion existant
-- Supprimer un avion par son ID
-- Afficher tous les avions
-- Rechercher un avion par **ID** ou par **module**
-- Trier les avions par **capacitÃ©** ou par **module**
-- Statistiques :
-  - Nombre total des avions
-  - Nombre dâ€™avions par statut
-  - Avion avec la plus grande capacitÃ©
-  - Avion avec la plus petite capacitÃ©
-  - Pourcentage dâ€™avions disponibles
-  - CapacitÃ© totale des avions
+Ce projet est une application en langage C qui permet de gérer les avions d’un aéroport.
+L’utilisateur peut ajouter, modifier, supprimer, rechercher, trier et afficher des avions, ainsi que consulter différentes statistiques liées aux avions.
 
-## ðŸ“‚ Structure du projet
-- `Projetsas.c` â†’ Code source du programme
-- `README.md` â†’ Documentation du projet
+Fonctionnalités
 
-## â–¶ï¸ Compilation & ExÃ©cution
-Pour compiler et exÃ©cuter le projet :  
+Ajouter un avion avec :
 
-```bash
-gcc Projetsas.c -o projetsas
-./projetsas
-```
+Module (nom)
 
-## ðŸ“– Exemple de Menu
-```
-========================MENU====================
- ||  1-Pour ajouter une avion appuyer sur     1 ||
- ||  2-Pour modifier une avion appuyer sur    2 ||
- ||  3-Pour Supprimer une avion appuyer sur   3 ||
- ||  4-Pour Afficher une avion appuyer sur    4 ||
- ||  5-Pour Rechercher une avion appuyer sur  5 ||
- ||  6-Pour Trier une avion appuyer sur       6 ||
- ||  7-Pour Statistique une avion appuyer sur 7 ||
-=================================================
-```
+Capacité
 
-## ðŸ‘¨â€ðŸ’» Auteur
-- **Abdellah Moukarrame**
+Statut (en vol, disponible, en maintenance)
 
----
-âœ¨ Ce projet est un exercice acadÃ©mique visant Ã  pratiquer la programmation en langage C et la gestion de structures de donnÃ©es.
+
+Modifier un avion existant
+
+Supprimer un avion par son ID
+
+Afficher tous les avions
+
+Rechercher un avion par ID ou par module
+
+Trier les avions par capacité ou par module
+
+Statistiques :
+
+Nombre total des avions
+
+Nombre d’avions par statut
+
+Avion avec la plus grande capacité
+
+Avion avec la plus petite capacité
+
+Pourcentage d’avions disponibles
+
+Capacité totale des avions
+
+
+
+Structure du projet
+
+Projetsas.c → Code source du programme
+
+README.md → Documentation du projet
+
+
+Compilation & Exécution
+
+Pour compiler et exécuter le projet :
+
+gcc Projetsas.c -o projetsas  
+./projetsas  
+
+======================== MENU ====================  
+ ||  1 - Pour ajouter un avion appuyez sur     1 ||  
+ ||  2 - Pour modifier un avion appuyez sur    2 ||  
+ ||  3 - Pour supprimer un avion appuyez sur   3 ||  
+ ||  4 - Pour afficher les avions appuyez sur  4 ||  
+ ||  5 - Pour rechercher un avion appuyez sur  5 ||  
+ ||  6 - Pour trier les avions appuyez sur     6 ||  
+ ||  7 - Pour statistiques appuyez sur         7 ||  
+==================================================  
+
+
